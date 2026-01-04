@@ -11,6 +11,8 @@ services:
         value: 3.11.0
       - key: GOOGLE_SHEET_KEY
         sync: false
+      - key: GOOGLE_CREDENTIALS_PATH
+        value: /etc/secrets/credentials.json
     secretFiles:
       - name: google-credentials
         mountPath: /etc/secrets

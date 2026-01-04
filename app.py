@@ -234,8 +234,12 @@ def save_to_google_sheets(data):
         print(f"✅ Service Account: {service_email}")
         print(f"✅ Project: {credentials_dict.get('project_id', 'Unknown')}")
         
-        # Setup Google Sheets
-        scope = ["https://www.googleapis.com/auth/spreadsheets"]
+        # CORRECTED SCOPE - ADD DRIVE PERMISSION
+        scope = [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive.file",
+            "https://www.googleapis.com/auth/drive"
+        ]
         
         creds = Credentials.from_service_account_info(
             credentials_dict, 
@@ -331,6 +335,7 @@ def submit_form():
         else:
             data = request.form.to_dict()
         
+        print(f"👤 Name: {data.get('name', 'Unknown')}")
         print(f"📧 Email: {data.get('email', 'No email')}")
         print(f"📞 Phone: {data.get('phone', 'No phone')}")
         
