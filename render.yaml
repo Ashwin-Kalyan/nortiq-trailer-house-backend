@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: trailer-house-form-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --config gunicorn_config.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: GOOGLE_SHEET_KEY
+        sync: false
+    secretFiles:
+      - name: google-credentials
+        mountPath: /etc/secrets
+        fileName: credentials.json
+        content: ${GOOGLE_CREDENTIALS_JSON}
+    autoDeploy: true
